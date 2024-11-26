@@ -4,15 +4,19 @@ import dts from 'vite-plugin-dts'
 import { resolve } from 'path'
 
 export default defineConfig({
-  plugins: [vue(), dts()],
+  plugins: [
+    vue(),
+    dts({ include: ['src'] })
+  ],
   build: {
     lib: {
       entry: resolve(__dirname, 'src/index.ts'),
       name: 'WebGisComponents',
-      fileName: 'index'
+      formats: ['es', 'umd'],
+      fileName: (format) => `web-gis-components.${format}.js`
     },
     rollupOptions: {
-      external: ['vue', 'element-plus', '@web-gis/utils'],
+      external: ['vue', 'element-plus'],
       output: {
         globals: {
           vue: 'Vue',

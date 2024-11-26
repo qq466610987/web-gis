@@ -2,7 +2,22 @@
   <el-container class="layout-container">
     <el-header class="header" height="auto">
       <div class="ribbon">
-        <el-tabs type="card" class="tool-tabs"> </el-tabs>
+        <el-tabs type="border-card" class="tool-tabs" v-model="activeTab">
+          <el-tab-pane label="视图" name="view">
+            <div class="ribbon-content">
+              <PanelButton text="放大" icon="Plus" />
+            </div>
+          </el-tab-pane>
+          <el-tab-pane label="图层" name="layer">
+            <div class="ribbon-content">
+            </div>
+          </el-tab-pane>
+          <el-tab-pane label="工具" name="tool">
+            <div class="ribbon-content">
+              <div class="ribbon-group"></div>
+            </div>
+          </el-tab-pane>
+        </el-tabs>
       </div>
     </el-header>
 
@@ -15,13 +30,17 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, computed } from "vue";
+import { ref, onMounted } from "vue";
 import { Map, View } from "ol";
 import { LayerUtil } from "@web-gis/utils";
+import { PanelButton } from "@web-gis/components";
 
 const mapContainer = ref<HTMLElement>();
 // 创建地图实例
 let map: Map | null = null;
+
+type RibbonTab = "view" | "layer" | "tool";
+const activeTab = ref<RibbonTab>("view");
 
 onMounted(() => {
   if (!mapContainer.value) return;
@@ -49,37 +68,13 @@ onMounted(() => {
 }
 
 .ribbon {
-  .tool-tabs {
-    :deep(.el-tabs__header) {
-      margin: 0;
-
-      .el-tabs__nav {
-        border: none;
-      }
-
-      .el-tabs__item {
-        height: 32px;
-        line-height: 32px;
-        border: none;
-
-        &.is-active {
-          background: #fff;
-        }
-
-        .tab-label {
-          font-size: 14px;
-        }
-      }
-    }
-
-    :deep(.el-tabs__content) {
-      padding: 8px;
-      background: #fff;
-    }
+  :deep(.el-tabs__item) {
+    min-width: 80px;
   }
 }
 
 .ribbon-content {
+  height: 40px;
   display: flex;
   gap: 16px;
   padding: 4px 0;
