@@ -1,3 +1,1 @@
-export const hello = () => {
-  console.log('hello from utils')
-} 
+export { default as LayerUtil } from './layer-util'
