@@ -33,7 +33,40 @@
             </div>
           </el-tab-pane>
           <el-tab-pane label="图层" name="layer">
-            <div class="ribbon-content"></div>
+            <div class="ribbon-content">
+              <div class="ribbon-content__group">
+                <PanelButton text="在线">
+                  <template #icon>
+                    <font-awesome-icon :icon="['fas', 'globe']" />
+                  </template>
+                </PanelButton>
+                <PanelButton text="wmts">
+                  <template #icon>
+                    <i class="iconfont icon-WMTS"></i>
+                  </template>
+                </PanelButton>
+                <PanelButton text="wms">
+                  <template #icon>
+                    <i class="iconfont icon-wms"></i>
+                  </template>
+                </PanelButton>
+                <PanelButton text="xyz">
+                  <template #icon>
+                    <i class="iconfont icon-xyz"></i>
+                  </template>
+                </PanelButton>
+                <PanelButton text="Arcgis">
+                  <template #icon>
+                    <i class="iconfont icon-ArcGIS"></i>
+                  </template>
+                </PanelButton>
+                <PanelButton text="Geojson">
+                  <template #icon>
+                    <i class="iconfont icon-geojson"></i>
+                  </template>
+                </PanelButton>
+              </div>
+            </div>
           </el-tab-pane>
           <el-tab-pane label="工具" name="tool">
             <div class="ribbon-content">
