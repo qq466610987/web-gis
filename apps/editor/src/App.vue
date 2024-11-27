@@ -5,12 +5,15 @@
         <el-tabs type="border-card" class="tool-tabs" v-model="activeTab">
           <el-tab-pane label="视图" name="view">
             <div class="ribbon-content">
-              <PanelButton text="放大" icon="Plus" />
+              <PanelButton text="放大">
+                <template #icon>
+                  <font-awesome-icon :icon="['fas', 'square-plus']" />
+                </template>
+              </PanelButton>
             </div>
           </el-tab-pane>
           <el-tab-pane label="图层" name="layer">
-            <div class="ribbon-content">
-            </div>
+            <div class="ribbon-content"></div>
           </el-tab-pane>
           <el-tab-pane label="工具" name="tool">
             <div class="ribbon-content">
@@ -33,7 +36,8 @@
 import { ref, onMounted } from "vue";
 import { Map, View } from "ol";
 import { LayerUtil } from "@web-gis/utils";
-import { PanelButton } from "@web-gis/components";
+import PanelButton from "./components/panel-button.vue";
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
 const mapContainer = ref<HTMLElement>();
 // 创建地图实例
