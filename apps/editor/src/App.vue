@@ -5,11 +5,31 @@
         <el-tabs type="border-card" class="tool-tabs" v-model="activeTab">
           <el-tab-pane label="视图" name="view">
             <div class="ribbon-content">
-              <PanelButton text="放大">
-                <template #icon>
-                  <font-awesome-icon :icon="['fas', 'square-plus']" />
-                </template>
-              </PanelButton>
+              <div class="ribbon-content__group">
+                <PanelButton text="场景">
+                  <template #icon>
+                    <font-awesome-icon :icon="['fas', 'floppy-disk']" />
+                  </template>
+                </PanelButton>
+              </div>
+              <!-- 视角 -->
+              <div class="ribbon-content__group">
+                <PanelButton text="全球">
+                  <template #icon>
+                    <font-awesome-icon icon="globe" />
+                  </template>
+                </PanelButton>
+                <PanelButton text="中国">
+                  <template #icon>
+                    <font-awesome-icon :icon="['fas', 'star']" />
+                  </template>
+                </PanelButton>
+                <PanelButton text="自定义">
+                  <template #icon>
+                    <font-awesome-icon :icon="['fas', 'eye']" />
+                  </template>
+                </PanelButton>
+              </div>
             </div>
           </el-tab-pane>
           <el-tab-pane label="图层" name="layer">
@@ -67,8 +87,12 @@ onMounted(() => {
 
 .header {
   padding: 0;
-  border-bottom: 1px solid #dcdfe6;
-  background: #f5f7fa;
+}
+
+.tool-tabs {
+  :deep(.el-tabs__content) {
+    padding: 5px;
+  }
 }
 
 .ribbon {
@@ -78,45 +102,18 @@ onMounted(() => {
 }
 
 .ribbon-content {
-  height: 40px;
+  min-height: 50px;
   display: flex;
   gap: 16px;
-  padding: 4px 0;
 
-  .ribbon-group {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  .ribbon-content__group {
+    box-sizing: border-box;
     padding: 0 8px;
-    border-right: 1px solid #dcdfe6;
-
-    &:last-child {
-      border-right: none;
-    }
-
-    .group-title {
-      font-size: 12px;
-      color: #606266;
-      margin-bottom: 4px;
-    }
-
-    .group-content {
-      display: flex;
-      gap: 4px;
-
-      .el-button {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        height: auto;
-        padding: 4px 8px;
-
-        .el-icon {
-          font-size: 20px;
-          margin-bottom: 2px;
-        }
-      }
-    }
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-right: 5px;
+    border-right: 2px solid #6a6b6e;
   }
 }
 

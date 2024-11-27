@@ -16,12 +16,15 @@
     "@types/node": "^22.9.3",
     "@web-gis/components": "workspace:*",
     "@web-gis/utils": "workspace:*",
+    "autoprefixer": "^10.4.20",
     "element-plus": "^2.0.0",
+    "nanoid": "^5.0.0",
     "ol": "^8.2.0",
     "pinia": "^2.0.0",
+    "postcss": "^8.4.49",
+    "tailwindcss": "^3.4.15",
     "vue": "^3.0.0",
-    "vue-router": "^4.0.0",
-    "nanoid": "^5.0.0"
+    "vue-router": "^4.0.0"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.0.0",
