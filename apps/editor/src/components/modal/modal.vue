@@ -1,30 +1,25 @@
 <script setup lang="ts">
-import { useDraggable } from "@web-gis/utils";
-import { onMounted, ref, useTemplateRef } from "vue";
-import transitionEvents from "./transition";
+import { useDraggable } from '@web-gis/utils'
+import { onMounted, ref, useTemplateRef } from 'vue'
+import transitionEvents from './transition'
 
 const props = defineProps({
   title: {
     type: String,
-    default: "标题",
+    default: '标题',
   },
-});
-const headerRef = useTemplateRef("headerRef");
-const modalRef = useTemplateRef("modalRef");
+})
+const headerRef = useTemplateRef('headerRef')
+const modalRef = useTemplateRef('modalRef')
 
 onMounted(() => {
   if (modalRef.value && headerRef.value) {
-    useDraggable(
-      modalRef.value!,
-      headerRef.value!,
-      ref(true),
-      document.getElementById("main-container")!,
-    );
+    useDraggable(modalRef.value!, headerRef.value!, ref(true), document.getElementById('main-container')!)
   }
-});
+})
 
 // 收起内容框
-const isCollapse = ref(false);
+const isCollapse = ref(false)
 </script>
 
 <template>
@@ -35,10 +30,8 @@ const isCollapse = ref(false);
           {{ title }}
         </div>
         <div class="text-lg flex gap-1">
-          <el-icon  class="w-modal-icon">
-            <ArrowDownBold
-              @click="isCollapse = !isCollapse"
-            />
+          <el-icon class="w-modal-icon">
+            <ArrowDownBold @click="isCollapse = !isCollapse" />
           </el-icon>
           <el-icon class="w-modal-icon">
             <CloseBold />
@@ -61,8 +54,8 @@ const isCollapse = ref(false);
 
 <style lang="scss" scoped>
 .w-modal {
-  position: absolute;
   background-color: rgba(60, 56, 56, 0.462);
+  position: absolute;
   z-index: 1001;
   min-width: 200px;
   resize: both;

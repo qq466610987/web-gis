@@ -87,22 +87,22 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from "vue";
-import { Map, View } from "ol";
-import { LayerUtil } from "@web-gis/utils";
-import PanelButton from "./components/panel-button.vue";
-import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
-import WModal from "./components/modal/modal.vue";
+import { ref, onMounted } from 'vue'
+import { Map, View } from 'ol'
+import { LayerUtil } from '@web-gis/utils'
+import panelbutton from './components/panel-button.vue'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import WModal from './components/modal/modal.vue'
 
-const mapContainer = ref<HTMLElement>();
+const mapContainer = ref<HTMLElement>()
 // 创建地图实例
-let map: Map | null = null;
+let map: Map | null = null
 
-type RibbonTab = "view" | "layer" | "tool";
-const activeTab = ref<RibbonTab>("view");
+type RibbonTab = 'view' | 'layer' | 'tool'
+const activeTab = ref<RibbonTab>('view')
 
 onMounted(() => {
-  if (!mapContainer.value) return;
+  if (!mapContainer.value) return
 
   map = new Map({
     target: mapContainer.value,
@@ -111,12 +111,13 @@ onMounted(() => {
       center: [0, 0],
       zoom: 2,
     }),
-  });
-});
+  })
+})
 </script>
 
 <style scoped lang="scss">
 .layout-container {
+  overflow: hidden;
   height: 100vh;
 }
 
@@ -137,36 +138,33 @@ onMounted(() => {
 }
 
 .ribbon-content {
-  min-height: 50px;
   display: flex;
   gap: 16px;
+  min-height: 50px;
 
   .ribbon-content__group {
     box-sizing: border-box;
-    padding: 0 8px;
     display: flex;
-    align-items: center;
     gap: 10px;
+    align-items: center;
+    padding: 0 8px;
     margin-right: 5px;
     border-right: 2px solid #6a6b6e;
   }
 }
 
 .main-container {
-  padding: 0;
   position: relative;
+  padding: 0;
 }
 
 .map-container {
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  inset: 0;
 }
 
 .panel-container {
-  border-left: 1px solid #dcdfe6;
   background: #fff;
+  border-left: 1px solid #dcdfe6;
 }
 </style>
