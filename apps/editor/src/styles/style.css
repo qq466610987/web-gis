@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* slider动画 */
+.slide-enter-active,
+.slide-leave-active {
+  transition: height 0.3s ease-in-out;
+}

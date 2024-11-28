@@ -7,6 +7,13 @@ settings:
 importers:
 
   .:
+    dependencies:
+      vue:
+        specifier: ^3.0.0
+        version: 3.5.13(typescript@5.7.2)
+      xe-utils:
+        specifier: ^3.5.32
+        version: 3.5.32
     devDependencies:
       '@fortawesome/fontawesome-svg-core':
         specifier: ^6.5.1
@@ -74,9 +81,6 @@ importers:
       tailwindcss:
         specifier: ^3.4.15
         version: 3.4.15
-      vue:
-        specifier: ^3.0.0
-        version: 3.5.13(typescript@5.7.2)
       vue-router:
         specifier: ^4.0.0
         version: 4.4.5(vue@3.5.13(typescript@5.7.2))
@@ -2667,6 +2671,9 @@ packages:
 
   wrappy@1.0.2:
     resolution: {integrity: sha512-l4Sp/DRseor9wL6EvV2+TuQn63dMkPjZ/sp9XkghTEbV9KlPS1xUsZ3u7/IQO4wxtcFB4bgpQPRcR3QCvezPcQ==}
+
+  xe-utils@3.5.32:
+    resolution: {integrity: sha512-R8ZT2lRnRBQO3pchM1za/Aru+/29DVDWD/OmOFODWWGkiQYz0iVIr8Bq8uKXS6zMhEsSqVCrn46bXzfe/Agjcw==}
 
   xml-name-validator@4.0.0:
     resolution: {integrity: sha512-ICP2e+jsHvAj2E2lIHxa5tjXRlKDJo4IdvPvCXbXQGdzSfmSpNVyIKMvoZHjDY9DP0zV17iI85o90vRFXNccRw==}
@@ -5719,6 +5726,8 @@ snapshots:
       strip-ansi: 7.1.0
 
   wrappy@1.0.2: {}
+
+  xe-utils@3.5.32: {}
 
   xml-name-validator@4.0.0: {}
 

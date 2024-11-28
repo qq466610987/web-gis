@@ -78,7 +78,8 @@
     </el-header>
 
     <el-container>
-      <el-main class="main-container">
+      <el-main class="main-container" id="main-container">
+        <WModal></WModal>
         <div class="map-container" ref="mapContainer"></div>
       </el-main>
     </el-container>
@@ -91,6 +92,7 @@ import { Map, View } from "ol";
 import { LayerUtil } from "@web-gis/utils";
 import PanelButton from "./components/panel-button.vue";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+import WModal from "./components/modal/modal.vue";
 
 const mapContainer = ref<HTMLElement>();
 // 创建地图实例
