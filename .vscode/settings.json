@@ -1,0 +1,24 @@
+{
+  "css.validate": false,
+  //配置默认格式化工具
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "stylelint.validate": [
+    "css",
+    "scss",
+    "less",
+    "postcss",
+    "vue",
+  ],
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "always",
+    "source.fixAll.stylelint": "always",
+  },
+  "typescript.tsdk": "node_modules\\typescript\\lib",
+  "[vue]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+
+}
