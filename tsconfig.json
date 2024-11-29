@@ -1,33 +1,22 @@
 {
   "compilerOptions": {
-    "target": "ES2020",
+    "target": "ESNext",
     "useDefineForClassFields": true,
     "module": "ESNext",
-    "lib": ["ES2020", "DOM", "DOM.Iterable"],
-    "skipLibCheck": true,
-    "moduleResolution": "node",
+    "moduleResolution": "Node",
+    "strict": true,
+    "jsx": "preserve",
+    "sourceMap": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "strict": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true,
-    "composite": true,
+    "esModuleInterop": true,
+    "lib": ["ESNext", "DOM"],
+    "skipLibCheck": true,
     "noEmit": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["apps/editor/src/*"],
-      "@web-gis/*": ["packages/*/src"]
+      "@/*": ["./src/*"]
     }
   },
-  "include": [
-    "apps/*/src/**/*.ts",
-    "apps/*/src/**/*.d.ts",
-    "apps/*/src/**/*.tsx",
-    "apps/*/src/**/*.vue",
-    "packages/*/src/**/*.ts",
-    "packages/*/src/**/*.d.ts",
-    "packages/*/src/**/*.tsx",
-    "packages/*/src/**/*.vue"
-  ]
+  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"]
 } 

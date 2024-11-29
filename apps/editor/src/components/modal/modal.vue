@@ -1,19 +1,22 @@
-<script setup lang="ts">
+<script setup lang="ts" name="WModal">
+import type { ModalProps, ModalEmits, ModalSlots } from './types'
 import { useDraggable } from '@web-gis/utils'
 import { onMounted, ref, useTemplateRef } from 'vue'
 import transitionEvents from './transition'
 
-const props = defineProps({
-  title: {
-    type: String,
-    default: '标题',
-  },
+const props = withDefaults(defineProps<ModalProps>(), {
+  title: '标题',
+  isDraggable: true,
 })
+
+const emit = defineEmits<ModalEmits>()
+defineSlots<ModalSlots>()
+
 const headerRef = useTemplateRef('headerRef')
 const modalRef = useTemplateRef('modalRef')
 
 onMounted(() => {
-  if (modalRef.value && headerRef.value) {
+  if (props.isDraggable === true && modalRef.value && headerRef.value) {
     useDraggable(modalRef.value!, headerRef.value!, ref(true), document.getElementById('main-container')!)
   }
 })
@@ -23,17 +26,17 @@ const isCollapse = ref(false)
 </script>
 
 <template>
-  <div class="w-modal" ref="modalRef">
+  <div class="w-modal" ref="modalRef" v-show="modelValue">
     <div class="w-modal__header" ref="headerRef">
       <slot name="header">
         <div>
           {{ title }}
         </div>
-        <div class="text-lg flex gap-1">
+        <div class="flex gap-1 text-lg">
           <el-icon class="w-modal-icon">
             <ArrowDownBold @click="isCollapse = !isCollapse" />
           </el-icon>
-          <el-icon class="w-modal-icon">
+          <el-icon class="w-modal-icon" @click="emit('update:modelValue', false)">
             <CloseBold />
           </el-icon>
         </div>
@@ -54,50 +57,49 @@ const isCollapse = ref(false)
 
 <style lang="scss" scoped>
 .w-modal {
-  background-color: rgba(60, 56, 56, 0.462);
   position: absolute;
+  top: v-bind('top');
+  left: v-bind('left');
   z-index: 1001;
   min-width: 200px;
-  resize: both;
   overflow: auto;
-  &:resizing {
-    border: 2px dashed rgb(7, 141, 230);
-    opacity: 0.8;
-    // 添加阴影效果
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
-    // 添加过渡效果
-    transition: all 0.3s ease;
-  }
+  resize: both;
+  background-color: rgb(60 56 56 / 71.3%);
+  box-shadow: 0 0 15px rgb(0 0 0 / 30%);
 }
 
 .w-modal__header {
   display: flex;
   justify-content: space-between;
-  border-bottom: 5px solid rgba(40, 35, 35, 0.77);
   padding: 8px 15px;
   user-select: none;
+  border-bottom: 5px solid rgb(40 35 35 / 77%);
+
   &:hover {
     cursor: move;
-    background-color: rgba(0, 0, 0, 0.541);
+    background-color: rgb(0 0 0 / 54.1%);
   }
 }
 
 .w-modal-icon {
   cursor: pointer;
+
   &:hover {
-    color: rgb(7, 141, 230);
+    color: rgb(7 141 230);
   }
 }
+
 .w-modal__body {
 }
 
 .w-modal-footer__resize {
   position: absolute;
-  width: 12px;
-  height: 12px;
   right: 0;
   bottom: 0;
+  width: 12px;
+  height: 12px;
   background: linear-gradient(-45deg, #58a 6px, transparent 0);
+
   &:hover {
     cursor: se-resize;
   }

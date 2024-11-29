@@ -20,6 +20,7 @@ defineProps<Props>()
 <style scoped lang="scss">
 .panel-button {
   min-width: 50px;
+  padding: 4px 8px;
   display: inline-flex;
   align-items: center;
   flex-direction: column;
@@ -29,7 +30,8 @@ defineProps<Props>()
   font-size: 14px;
 
   &:hover {
-    color: #409eff;
+    background-color: #6f7174;
+    border-radius: 8px;
   }
 }
 </style>

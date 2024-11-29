@@ -14,10 +14,12 @@
   "dependencies": {
     "@element-plus/icons-vue": "^2.0.0",
     "@types/node": "^22.9.3",
+    "@vitejs/plugin-vue-jsx": "^4.1.1",
     "@web-gis/components": "workspace:*",
     "@web-gis/utils": "workspace:*",
     "autoprefixer": "^10.4.20",
     "element-plus": "^2.0.0",
+    "jsdom": "^25.0.1",
     "nanoid": "^5.0.0",
     "ol": "^8.2.0",
     "pinia": "^2.0.0",
@@ -32,7 +34,7 @@
     "@vue/tsconfig": "^0.5.0",
     "sass": "^1.0.0",
     "vite": "^5.0.0",
-    "vitest": "^1.0.0",
+    "vitest": "^1.6.0",
     "vue-tsc": "^1.0.0"
   },
   "exports": {

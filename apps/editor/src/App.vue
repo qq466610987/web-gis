@@ -79,7 +79,7 @@
 
     <el-container>
       <el-main class="main-container" id="main-container">
-        <WModal></WModal>
+        <WModal v-model="visible" title="标题" top="100px" left="100px"></WModal>
         <div class="map-container" ref="mapContainer"></div>
       </el-main>
     </el-container>
@@ -90,10 +90,11 @@
 import { ref, onMounted } from 'vue'
 import { Map, View } from 'ol'
 import { LayerUtil } from '@web-gis/utils'
-import panelbutton from './components/panel-button.vue'
+import PanelButton from './components/panel-button.vue'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import WModal from './components/modal/modal.vue'
 
+const visible = ref(true)
 const mapContainer = ref<HTMLElement>()
 // 创建地图实例
 let map: Map | null = null
@@ -117,8 +118,8 @@ onMounted(() => {
 
 <style scoped lang="scss">
 .layout-container {
-  overflow: hidden;
   height: 100vh;
+  overflow: hidden;
 }
 
 .header {
