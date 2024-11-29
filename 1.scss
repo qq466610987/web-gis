@@ -1,0 +1,14 @@
+.panel-button {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: center;
+  min-width: 50px;
+  font-size: 14px;
+  cursor: pointer;
+  user-select: none;
+
+  &:hover {
+    color: #409eff;
+  }
+}

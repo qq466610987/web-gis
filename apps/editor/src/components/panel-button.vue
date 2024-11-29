@@ -1,11 +1,11 @@
 <script setup lang="ts">
 interface Props {
-  text?: string;
-  type?: "primary" | "success" | "warning" | "danger" | "info";
-  icon?: string;
+  text?: string
+  type?: 'primary' | 'success' | 'warning' | 'danger' | 'info'
+  icon?: string
 }
 
-defineProps<Props>();
+defineProps<Props>()
 </script>
 
 <template>
@@ -27,6 +27,7 @@ defineProps<Props>();
   cursor: pointer;
   user-select: none;
   font-size: 14px;
+
   &:hover {
     color: #409eff;
   }
