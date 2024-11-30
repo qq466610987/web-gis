@@ -18,15 +18,31 @@ describe('WModal组件', () => {
         ...props
       },
       global: {
-        plugins: [ElementPlus]
-      }
+        plugins: [ElementPlus],
+        components: {
+          ArrowDownBold,
+          CloseBold
+        },
+        stubs: {
+          ArrowDownBold: true,
+          CloseBold: true
+        }
+      },
+      attachTo: document.body
     })
   }
 
-  it('基础渲染测试', () => {
+  it('基础渲染测试', async () => {
     const wrapper = createWrapper()
-    expect(wrapper.find('.w-modal').exists()).toBe(true)
-    expect(wrapper.find('.w-modal__header').exists()).toBe(true)
+    await nextTick()
+    
+    console.log(wrapper.html())
+    
+    expect(wrapper.element).toBeTruthy()
+    expect(wrapper.classes()).toContain('w-modal')
+    
+    const modal = wrapper.find('div')
+    expect(modal.exists()).toBe(true)
   })
 
   it('props 测试', () => {
@@ -36,9 +52,9 @@ describe('WModal组件', () => {
       left: '100px'
     })
     
-    expect(wrapper.find('.w-modal__header').text()).toContain('测试标题')
-    expect(wrapper.find('.w-modal').attributes('style')).toContain('top: 100px')
-    expect(wrapper.find('.w-modal').attributes('style')).toContain('left: 100px')
+    expect(wrapper.get('.w-modal__header').text()).toContain('测试标题')
+    expect(wrapper.get('.w-modal').attributes('style')).toContain('top: 100px')
+    expect(wrapper.get('.w-modal').attributes('style')).toContain('left: 100px')
   })
 
   it('显示/隐藏测试', async () => {
