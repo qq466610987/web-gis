@@ -1,22 +1,112 @@
-import WModal from '@/components/modal/modal.vue'
-import { describe, expect, it } from 'vitest'
 import { mount } from '@vue/test-utils'
+import { describe, expect, it, beforeEach, vi } from 'vitest'
+import WModal from '@/components/modal/modal.vue'
+import ElementPlus from 'element-plus'
+import { ArrowDownBold, CloseBold } from '@element-plus/icons-vue'
+import { nextTick } from 'vue'
+// Mock useDraggable
+vi.mock('@web-gis/utils', () => ({
+  useDraggable: vi.fn()
+}))
 
-describe('Modal组件', () => {
-  it('renders correctly', () => {
-    const wrapper = mount(() => WModal)
-    expect(wrapper.exists()).toBe(true)
+describe('WModal组件', () => {
+  const createWrapper = (props = {}) => {
+    return mount(WModal, {
+      props: {
+        title: '测试标题',
+        modelValue: true,
+        ...props
+      },
+      global: {
+        plugins: [ElementPlus]
+      }
+    })
+  }
+
+  it('基础渲染测试', () => {
+    const wrapper = createWrapper()
+    expect(wrapper.find('.w-modal').exists()).toBe(true)
+    expect(wrapper.find('.w-modal__header').exists()).toBe(true)
   })
-  it('可以正确的根据props渲染位置', () => {
+
+  it('props 测试', () => {
+    const wrapper = createWrapper({
+      title: '测试标题',
+      top: '100px',
+      left: '100px'
+    })
+    
+    expect(wrapper.find('.w-modal__header').text()).toContain('测试标题')
+    expect(wrapper.find('.w-modal').attributes('style')).toContain('top: 100px')
+    expect(wrapper.find('.w-modal').attributes('style')).toContain('left: 100px')
+  })
+
+  it('显示/隐藏测试', async () => {
+    const wrapper = createWrapper({ modelValue: true })
+    expect(wrapper.find('.w-modal').isVisible()).toBe(true)
+
+    await wrapper.setProps({ modelValue: false })
+    expect(wrapper.find('.w-modal').isVisible()).toBe(false)
+  })
+
+  it('关闭按钮测试', async () => {
+    const wrapper = createWrapper()
+    await wrapper.find('.w-modal-icon:last-child').trigger('click')
+    expect(wrapper.emitted('update:modelValue')).toBeTruthy()
+    expect(wrapper.emitted('update:modelValue')[0]).toEqual([false])
+  })
+
+  it('折叠功能测试', async () => {
+    const wrapper = createWrapper()
+    const collapseIcon = wrapper.find('.w-modal-icon:first-child')
+    
+    // 初始状态：内容可见
+    expect(wrapper.find('.w-modal-body__wrapper').isVisible()).toBe(true)
+    
+    // 点击折叠
+    await collapseIcon.trigger('click')
+    expect(wrapper.find('.w-modal-body__wrapper').isVisible()).toBe(false)
+    
+    // 再次点击展开
+    await collapseIcon.trigger('click')
+    expect(wrapper.find('.w-modal-body__wrapper').isVisible()).toBe(true)
+  })
+
+  it('插槽测试', async () => {
     const wrapper = mount(WModal, {
       props: {
-        top: '100px',
-        left: '100px',
-        visible: true,
-        isDraggable: false
+        modelValue: true
       },
+      global: {
+        plugins: [ElementPlus]
+      },
+      slots: {
+        default: '<div class="test-content">测试内容</div>'
+      }
     })
-    expect(wrapper.find('.w-modal').style.top).toBe('100px')
-    expect(wrapper.find('.w-modal').style.left).toBe('100px')
+    
+    await nextTick()
+    
+    expect(wrapper.html()).toContain('测试内容')
+  })
+
+  it('拖拽功能初始化测试', async () => {
+    const wrapper = mount(WModal, {
+      props: {
+        modelValue: true,
+        isDraggable: true
+      },
+      global: {
+        plugins: [ElementPlus]
+      }
+    })
+    
+    await nextTick()
+    
+    const header = wrapper.find('.w-modal__header')
+    const modal = wrapper.find('.w-modal')
+    
+    expect(header.exists()).toBe(true)
+    expect(modal.exists()).toBe(true)
   })
 })
