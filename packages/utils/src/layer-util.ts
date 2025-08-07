@@ -8,18 +8,24 @@ import ImageSource from 'ol/source/Image'
 import Tile from 'ol/Tile'
 
 interface GeoserverWMSOptions {
-  url: string;
-  layerName: string;
-  workspace?: string;
-  sourceOptions?: Partial<WMSSourceOptions>;
-  layerOptions?: Partial<ImageLayerOptions>;
+  url: string
+  layerName: string
+  workspace?: string
+  sourceOptions?: Partial<WMSSourceOptions>
+  layerOptions?: Partial<ImageLayerOptions>
 }
+
+interface LayerOptions {
+  type: 'wms' | 'wmts' | 'xyz'
+}
+interface xyzLayerOptions extends 
 
 /**
  * 图层工具类
- * 用于创建各种地图图层，包括天地图底图和 GeoServer 服务图层
+ * 用于创建各种地图图层
  */
 export default class LayerUtil {
+  // 🧐这里有必要设置为static的吗？
   private static TDT_TOKEN = '0f2b24825c004c4f2179d093c9bf2f7b'
 
   constructor(TDT_TOKEN = '0f2b24825c004c4f2179d093c9bf2f7b') {
@@ -27,13 +33,18 @@ export default class LayerUtil {
   }
 
   /**
+   * TODO:
+   * 通用的创建Layer的方法
+   */
+  static createLayer(json:any) {}
+  /**
    * 创建天地图矢量图层
-   * TODO: 需要实现具体逻辑
    */
   static createTdtVecLayer(): TileLayer<XYZ> {
     return new TileLayer({
       source: new XYZ({
-        url: `http://t{0-7}.tianditu.gov.cn/cia_w/wmts?` +
+        url:
+          `http://t{0-7}.tianditu.gov.cn/cia_w/wmts?` +
           `SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&LAYER=img` +
           `&STYLE=default&TILEMATRIXSET=w&FORMAT=tiles&TILEMATRIX={z}&TILEROW={y}&TILECOL={x}&tk=${LayerUtil.TDT_TOKEN}`,
       }),
@@ -44,7 +55,8 @@ export default class LayerUtil {
   static createTdtImageLayer(): TileLayer {
     return new TileLayer({
       source: new XYZ({
-        url: `http://t{0-7}.tianditu.gov.cn/img_w/wmts?` +
+        url:
+          `http://t{0-7}.tianditu.gov.cn/img_w/wmts?` +
           `SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&LAYER=img` +
           `&STYLE=default&TILEMATRIXSET=w&FORMAT=tiles&TILEMATRIX={z}&TILEROW={y}&TILECOL={x}&tk=${LayerUtil.TDT_TOKEN}`,
       }),
@@ -55,7 +67,8 @@ export default class LayerUtil {
   static createTdtImageAnoLayer(): TileLayer {
     return new TileLayer({
       source: new XYZ({
-        url: `http://t{0-7}.tianditu.gov.cn/cia_w/wmts?` +
+        url:
+          `http://t{0-7}.tianditu.gov.cn/cia_w/wmts?` +
           `SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&LAYER=cia` +
           `&STYLE=default&TILEMATRIXSET=w&FORMAT=tiles&TILEMATRIX={z}&TILEROW={y}&TILECOL={x}&tk=${LayerUtil.TDT_TOKEN}`,
       }),
@@ -94,4 +107,3 @@ export default class LayerUtil {
     return new ImageLayer({})
   }
 }
-
